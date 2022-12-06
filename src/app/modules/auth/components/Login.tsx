@@ -10,6 +10,8 @@ import {useAuth} from '../core/Auth'
 
 import {buildUserModelFromAuth} from '../builders/userProfileBuilder'
 import { useDocument } from 'react-firebase-hooks/firestore';
+import { fetchSingleProfessionalRequest } from '../../../redux/action-creators/professionals'
+import { useDispatch } from 'react-redux'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -37,6 +39,7 @@ const initialValues = {
 export function Login() {
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues,
@@ -45,11 +48,15 @@ export function Login() {
       setLoading(true)
       try {
         await loginFS(values.email, values.password)
+        console.log('after loggin');
+        dispatch(fetchSingleProfessionalRequest("MOMO"))
   
         const authModel = await getAuthModelFromAuth();
         saveAuth(authModel)
         let currentUser = await buildUserModelFromAuth();
         setCurrentUser(currentUser)
+
+       
 
        /* const {data: auth} = await login(values.email, values.password)
         saveAuth(auth)
@@ -235,3 +242,5 @@ export function Login() {
     </form>
   )
 }
+
+

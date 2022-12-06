@@ -16,24 +16,6 @@ export interface IProfileDetails {
   allowMarketing: boolean
 }
 
-export interface IUserProfileDetails
-{
-  id: string,
-  avatar: string,
-  first_name: string
-  last_name: string,
-  email: string,
-  city: string,
-  services: string[],
-  gender:string,
-  isProfessional:false, 
-  createdAt:string,
-  phoneNumber1:string,
-  phoneNumber2: string,
-  onlineStatus: string,
-  reviews:number
-}
-
 export interface IUpdateEmail {
   newEmail: string
   confirmPassword: string

@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import clsx from 'clsx'
-import {getUserByToken, register,updateUserProfil,createUserFS} from '../core/_requests'
+import {getUserByToken, register,updateUserProfil,createUserFS, createUserFSV2} from '../core/_requests'
 import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
@@ -17,7 +17,7 @@ import firebase from "firebase/compat/app"
 import { getAuth, signInWithEmailAndPassword, signOut,updateProfile } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AuthModel, UserModel } from '../core/_models'
-import {buildUserModelFromAuth,buildUserModelFromValues} from "../builders/userProfileBuilder"
+import {buildUserModelFromAuth,buildUserModelFromValues, initProfessionalUser} from "../builders/userProfileBuilder"
 
 
 const initialValues = {
@@ -81,7 +81,7 @@ export function Registration() {
        const firebaseCurrentUser = await app.auth().createUserWithEmailAndPassword(values.email, values.password);
        const updateCurrentUserProfile = await updateUserProfil(values.firstname,values.lastname);
        let userModel:UserModel|undefined   =await buildUserModelFromAuth()
-       await createUserFS(buildUserModelFromValues(values.firstname, values.lastname))
+       await createUserFSV2(initProfessionalUser(values.firstname, values.lastname))
   
        const tokenPrmise = await app.auth().currentUser?.getIdToken();
        let authModel:AuthModel ={api_token:tokenPrmise?tokenPrmise:"null token"}

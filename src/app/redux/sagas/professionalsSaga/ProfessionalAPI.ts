@@ -25,6 +25,7 @@ querySnapshot.forEach((doc:any) => {
          phoneNumber2: doc.data().phoneNumber2,
          createdAt:doc.data().createdAt,
          onlineStatus:doc.data().onlineStatus,
+         entityType: doc.data().entityType,
          reviews:doc.data().reviews}];
   });
 return professionals;

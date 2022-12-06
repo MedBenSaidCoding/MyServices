@@ -37,7 +37,6 @@ const professionalsReducer = (state:ProfessionalsStateType=initProfessionalsStat
         }
         default:
             return state;
-            break;
     }
 }
 

@@ -11,6 +11,9 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../redux/reducers/rootReducer'
+import { fetchSingleProfessionalRequest } from '../redux/action-creators/professionals'
 
 /**
  * Base URL of the website.
@@ -18,17 +21,19 @@ import {App} from '../App'
  * @see https://facebook.github.io/create-react-app/docs/using-the-public-folder
  */
 const {PUBLIC_URL} = process.env
-
+//const {loading, currentUser, error} = useSelector((state: RootState) => state.currentUser)
+     
 const AppRoutes: FC = () => {
-  const {currentUser} = useAuth()
-  console.log(currentUser);
+  const {currentUser, loggedUser} = useAuth()
+  const dispatch = useDispatch()
+  if(loggedUser){ dispatch(fetchSingleProfessionalRequest(loggedUser.id))}
   return (
     <BrowserRouter basename={PUBLIC_URL}>
       <Routes>
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
-          {currentUser ? (
+          {loggedUser ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
               <Route index element={<Navigate to='/dashboard' />} />

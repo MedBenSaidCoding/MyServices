@@ -7,10 +7,11 @@ export interface ProfessionalModel{
     city: string,
     services: string[],
     gender:string,
-    isProfessional:false, 
+    isProfessional:boolean, 
     createdAt:string,
     phoneNumber1:string,
     phoneNumber2: string,
     onlineStatus: string,
-    reviews:number
+    reviews:number,
+    entityType: string
     }

@@ -2,7 +2,7 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../../redux/reducers/rootReducer'
-import {fetchProfessionalsRequest} from '../../../redux/action-creators/professionals/index'
+import {fetchProfessionalsRequest, fetchSingleProfessionalRequest} from '../../../redux/action-creators/professionals/index'
 import {ProfessionalCard} from './Professionals/ProfessionalCard'
 
 export function GardeningService() {
@@ -10,7 +10,8 @@ export function GardeningService() {
   const {loading, professionals, error} = useSelector((state: RootState) => state.professionals)
 
   useEffect(() => {
-    dispatch(fetchProfessionalsRequest())
+    dispatch(fetchProfessionalsRequest());
+    dispatch(fetchSingleProfessionalRequest("MOMO"))
   }, [])
 
   return (
@@ -81,3 +82,5 @@ export function GardeningService() {
     </>
   )
 }
+
+

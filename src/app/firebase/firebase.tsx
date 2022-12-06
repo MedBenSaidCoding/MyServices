@@ -1,5 +1,7 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import 'firebase/compat/firestore';
+import ReduxSagaFirebase from 'redux-saga-firebase'
 
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
@@ -10,5 +12,5 @@ const app = firebase.initializeApp({
     appId: process.env.REACT_APP_API_APP_ID,
     measurementId: process.env.REACT_APP_API_MEASUREMENT_ID
 });
-
+export const reduxSagaFirebase = new ReduxSagaFirebase(app)
 export default app;

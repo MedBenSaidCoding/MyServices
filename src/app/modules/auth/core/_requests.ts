@@ -10,6 +10,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 import axios from 'axios'
 import {AuthModel, UserModel} from './_models'
+import { ProfessionalModel } from '../../../TSModels/Professionals/ProfessionalModel';
 
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -99,6 +100,22 @@ export async function createUserFS(user:UserModel) {
   phoneNumber2:"+212756432387",
   createdAt:new Date().toJSON().slice(0, 10)})
   .then(()=> console.warn("inside createUserFS"))
+  .catch(error=>console.error(error));
+  
+  
+}
+
+export async function createUserFSV2(user:ProfessionalModel) {
+  await setDoc(doc(db, "users", user.id), {...user,
+  avatar:"",
+  gender:"M",
+  services:["Déménagement","Bricolage","Ménage"], 
+  isProfessional:false, 
+  city:"Tanger", 
+  phoneNumber1:"+212623546578",
+  phoneNumber2:"+212756432387",
+  createdAt:new Date().toJSON().slice(0, 10)})
+  .then(()=> console.warn("inside createUserFSV2"))
   .catch(error=>console.error(error));
   
   
