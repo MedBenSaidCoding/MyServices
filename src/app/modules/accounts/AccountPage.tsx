@@ -4,6 +4,7 @@ import {PageLink, PageTitle} from '../../../_metronic/layout/core'
 import {Overview} from './components/Overview'
 import {Settings} from './components/settings/Settings'
 import {AccountHeader} from './AccountHeader'
+import { useAuth } from '../auth'
 
 const accountBreadCrumbs: Array<PageLink> = [
   {
@@ -21,6 +22,7 @@ const accountBreadCrumbs: Array<PageLink> = [
 ]
 
 const AccountPage: React.FC = () => {
+  const {loggedUser} = useAuth()
   return (
     <Routes>
       <Route

@@ -34,7 +34,7 @@ const PrivateRoutes = () => {
 
         {/* Lazy Modules */}
         <Route
-          path='crafted/pages/profile/*'
+          path='crafted/pages/profile/:id/*'
           element={
             <SuspensedView>
               <ProfilePage />

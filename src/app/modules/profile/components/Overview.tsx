@@ -1,4 +1,6 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+import { ProfessionalModel } from '../../../TSModels/Professionals/ProfessionalModel';
 import {
   FeedsWidget2,
   FeedsWidget3,
@@ -10,7 +12,11 @@ import {
   ListsWidget2,
 } from '../../../../_metronic/partials/widgets'
 
-export function Overview() {
+type props={
+  selectedUser : any
+}
+export function Overview(props:props) {
+  let {id} = useParams()
   return (
     <div className='row g-5 g-xxl-8'>
       <div className='col-xl-6'>

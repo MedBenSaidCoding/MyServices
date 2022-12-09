@@ -33,6 +33,11 @@ export const fetchProfessionalsFailure = (
     payload: userId
   }); 
 
+  export const SearchSingleProfessionalRequest = (userId:string): FetchSingleProfessionalRequest => ({
+    type: ProfessionalTypes.GET_SINGLE_PROFESSIONAL_REQUEST,
+    payload: userId
+  }); 
+
   export const fetchSingleProfessionalSuccess = (
     payload: ProfessionalModel
   ): FetchSingleProfessionalSuccess => ({

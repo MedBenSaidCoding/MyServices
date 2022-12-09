@@ -11,7 +11,6 @@ export function GardeningService() {
 
   useEffect(() => {
     dispatch(fetchProfessionalsRequest());
-    dispatch(fetchSingleProfessionalRequest("MOMO"))
   }, [])
 
   return (
