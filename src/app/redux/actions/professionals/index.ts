@@ -1,8 +1,10 @@
 import {ProfessionalModel} from '../../../TSModels/Professionals/ProfessionalModel'
 import {ProfessionalTypes} from '../../action-types/professionalTypes'
+import { SearchFilterModel } from '../../../TSModels/Professionals/SearchFilterModel';
 
 export type FetchProfessionalsRequest = {
-  type: typeof ProfessionalTypes.FETCH_PROFESSIONAL_REQUEST
+  type: typeof ProfessionalTypes.FETCH_PROFESSIONAL_REQUEST,
+  payload?: SearchFilterModel
 }
 
 export type FetchProfessionalsSuccess = {

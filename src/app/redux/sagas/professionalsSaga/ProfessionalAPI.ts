@@ -1,13 +1,26 @@
 import { ProfessionalModel } from '../../../TSModels/Professionals/ProfessionalModel';
 import app from "../../../firebase/firebase";
 import {getDocs,getFirestore,collection,query,where } from "firebase/firestore"; 
+import { SearchFilterModel } from '../../../TSModels/Professionals/SearchFilterModel';
 
 const db = getFirestore(app);
 
-export const getAllActivProfessionals= async()=>{
+export const getAllActivProfessionals= async(searchfilter?:SearchFilterModel)=>{
 let professionals:ProfessionalModel[] =[]
 
-const q = query(collection(db, "users"), where("isProfessional", "==", true));
+const conditions = [where("isProfessional", "==", true)]
+if(searchfilter && searchfilter.city!="All")
+{
+  conditions.push(where("city", "==", searchfilter?.city))
+}
+if(searchfilter && searchfilter.service!="All")
+{
+  conditions.push(where("services", "array-contains", searchfilter.service))
+}
+
+console.log(conditions);
+
+const q = query(collection(db, "users"), ...conditions);
 const querySnapshot = await getDocs(q);
 
 querySnapshot.forEach((doc:any) => {

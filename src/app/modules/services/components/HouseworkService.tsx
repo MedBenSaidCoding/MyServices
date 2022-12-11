@@ -4,17 +4,44 @@ import {useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../../redux/reducers/rootReducer'
 import {fetchProfessionalsRequest} from '../../../redux/action-creators/professionals/index'
 import {ProfessionalCard} from './Professionals/ProfessionalCard'
+import {useLayout} from '../../../../_metronic/layout/core'
+import {useLocation} from 'react-router-dom'
+import {Toolbar} from '../../../../_metronic/layout/components/toolbar/Toolbar'
+import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {Dropdown1} from '../../../../_metronic/partials'
+import {ToolbarExtended} from '../../../../_metronic/layout/components/toolbar/toolbars'
+import {ToolbarExtendedSearchProfessional} from '../../../../_metronic/layout/components/toolbar/toolbars/ToolbarExtendedSearchProfessional'
 
 export function HouseworkService() {
   const dispatch = useDispatch()
+  const {currentUser} = useSelector((state: RootState) => state.currentUser)
   const {loading, professionals, error} = useSelector((state: RootState) => state.professionals)
 
   useEffect(() => {
-    dispatch(fetchProfessionalsRequest())
-  }, [])
+
+    if(currentUser && currentUser.city )
+    {
+      dispatch(fetchProfessionalsRequest({city:currentUser.city, service:"All", sortBy:"Score"}));
+    }
+   
+  }, [currentUser?.city])
 
   return (
     <>
+      <div className='card mb-5 mb-xl-10'>
+        <div className='card-body pt-9 pb-0'>
+          <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
+            <div className='me-7 mb-4'></div>
+
+            <div className='flex-grow-1'>
+              <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
+                <ToolbarExtendedSearchProfessional />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className='d-flex flex-wrap flex-stack mb-6'></div>
 
       <div className='row g-6 g-xl-9'>

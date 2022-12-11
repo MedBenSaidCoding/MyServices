@@ -21,7 +21,7 @@ export function Dropdown1() {
               defaultValue={'1'}
             >
               <option></option>
-              <option value='1'>Approved</option>
+              <option value='1'>Jardinage</option>
               <option value='2'>Pending</option>
               <option value='3'>In Process</option>
               <option value='4'>Rejected</option>

@@ -1,17 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Navigate, Route, Routes, Outlet} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import {PageLink, PageTitle, useLayout} from '../../../_metronic/layout/core'
 import {Overview} from './components/Overview'
 import {Offers} from './components/Offers'
 import {HouseworkService} from './components/HouseworkService'
 import {MoveService} from './components/MoveService'
-import {GardeningService} from "./components/GardeningService"
+import {GardeningService} from './components/GardeningService'
 import {ServicesHeader} from './ServicesHeader'
 
 const accountBreadCrumbs: Array<PageLink> = [
   {
     title: 'Services',
-    path: '/crafted/account/overview',
+    path: '/services/housework',
     isSeparator: false,
     isActive: false,
   },
@@ -29,7 +29,6 @@ const ServicesPage: React.FC = () => {
       <Route
         element={
           <>
-            <ServicesHeader />
             <Outlet />
           </>
         }
@@ -43,7 +42,7 @@ const ServicesPage: React.FC = () => {
             </>
           }
         />
-         <Route
+        <Route
           path='move'
           element={
             <>

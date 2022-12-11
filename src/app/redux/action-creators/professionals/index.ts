@@ -8,10 +8,12 @@ import { FetchProfessionalsRequest,
     FetchSingleProfessionalSuccess,
     FetchSingleProfessionalFailure
    } from "../../actions/professionals";
+import { SearchFilterModel } from "../../../TSModels/Professionals/SearchFilterModel";
 
 
-export const fetchProfessionalsRequest = (): FetchProfessionalsRequest => ({
-    type: ProfessionalTypes.FETCH_PROFESSIONAL_REQUEST
+export const fetchProfessionalsRequest = (searchFilter?:SearchFilterModel): FetchProfessionalsRequest => ({
+    type: ProfessionalTypes.FETCH_PROFESSIONAL_REQUEST,
+    payload:searchFilter
   });  
   
 export const fetchProfessionalsSuccess = (

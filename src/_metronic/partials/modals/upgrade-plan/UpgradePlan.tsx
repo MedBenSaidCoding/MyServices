@@ -271,7 +271,7 @@ const UpgradePlan: FC = () => {
                                 key={index}
                               >
                                 <div className='pb-5'>
-                                  <h2 className='fw-bolder text-dark'>What’s in Startup Plan?</h2>
+                                  <h2 className='fw-bolder text-dark'>What’s in Startup Plan? </h2>
 
                                   <div className='text-gray-400 fw-bold'>{plan.description}</div>
                                 </div>

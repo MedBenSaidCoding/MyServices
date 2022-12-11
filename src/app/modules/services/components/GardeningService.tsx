@@ -7,11 +7,17 @@ import {ProfessionalCard} from './Professionals/ProfessionalCard'
 
 export function GardeningService() {
   const dispatch = useDispatch()
+  const {currentUser} = useSelector((state: RootState) => state.currentUser)
   const {loading, professionals, error} = useSelector((state: RootState) => state.professionals)
 
   useEffect(() => {
-    dispatch(fetchProfessionalsRequest());
-  }, [])
+
+    if(currentUser && currentUser.city )
+    {
+      dispatch(fetchProfessionalsRequest({city:currentUser.city, service:"All", sortBy:"Score"}));
+    }
+   
+  }, [currentUser?.city])
 
   return (
     <>

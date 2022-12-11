@@ -13,13 +13,13 @@ import {ProfessionalModel} from '../../../TSModels/Professionals/ProfessionalMod
 
 //Firebase
 import app, {reduxSagaFirebase} from '../../../firebase/firebase'
-import {FetchSingleProfessionalRequest, UpdateSingleUserRequest} from '../../actions/professionals'
-import { object } from 'yup';
-import { UpdateSingleUserFailure } from '../../actions/professionals/index';
+import {FetchProfessionalsRequest, FetchSingleProfessionalRequest, UpdateSingleUserRequest} from '../../actions/professionals'
 
-function* fetchProfessionalsSaga() {
+
+function* fetchProfessionalsSaga(action:FetchProfessionalsRequest) {
   try {
-    const querySnapshot: ProfessionalModel[] = yield call(getAllActivProfessionals)
+   
+    const querySnapshot: ProfessionalModel[] = yield call(getAllActivProfessionals, action.payload)
     yield put(fetchProfessionalsSuccess(querySnapshot))
   } catch (error) {
     if (typeof error === 'string') yield put(fetchProfessionalsFailure(error))

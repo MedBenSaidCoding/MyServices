@@ -26,7 +26,7 @@ const ToolbarClassic = () => {
               path='/media/icons/duotune/general/gen031.svg'
               className='svg-icon-6 svg-icon-muted me-1'
             />
-            Filter
+            Filter2
           </a>
           <Dropdown1 />
         </div>
