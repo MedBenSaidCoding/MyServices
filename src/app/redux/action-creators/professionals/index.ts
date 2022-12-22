@@ -1,6 +1,6 @@
 import { ProfessionalModel } from "../../../TSModels/Professionals/ProfessionalModel";
 import { ProfessionalTypes } from "../../action-types/professionalTypes";
-import { UpdateSingleUserRequest, UpdateSingleUserSuccess, UpdateSingleUserFailure } from '../../actions/professionals/index';
+import { UpdateSingleUserRequest, UpdateSingleUserSuccess, UpdateSingleUserFailure, SearchSingleProfessionalRequest, SearchSingleProfessionalSuccess, SearchSingleProfessionalFailure } from '../../actions/professionals/index';
 import { FetchProfessionalsRequest,
    FetchProfessionalsSuccess,
     FetchProfessionalsFailure,
@@ -35,8 +35,8 @@ export const fetchProfessionalsFailure = (
     payload: userId
   }); 
 
-  export const SearchSingleProfessionalRequest = (userId:string): FetchSingleProfessionalRequest => ({
-    type: ProfessionalTypes.GET_SINGLE_PROFESSIONAL_REQUEST,
+  export const searchSingleProfessionalRequest = (userId:string): SearchSingleProfessionalRequest => ({
+    type: ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_REQUEST,
     payload: userId
   }); 
 
@@ -44,6 +44,13 @@ export const fetchProfessionalsFailure = (
     payload: ProfessionalModel
   ): FetchSingleProfessionalSuccess => ({
     type: ProfessionalTypes.GET_SINGLE_PROFESSIONAL_SUCCESS,
+    payload
+  });
+
+  export const searchSingleProfessionalSuccess = (
+    payload: ProfessionalModel
+  ): SearchSingleProfessionalSuccess => ({
+    type: ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_SUCCESS,
     payload
   });
   
@@ -54,6 +61,13 @@ export const fetchSingleProfessionalFailure = (
     error
   });  
 
+  export const searchSingleProfessionalFailure = (
+    error: string
+  ): SearchSingleProfessionalFailure => ({
+    type: ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_FAILURE,
+    error
+  });  
+
 
   export const updateSingleUserRequest = (user:ProfessionalModel): UpdateSingleUserRequest => ({
     type: ProfessionalTypes.UPDATE_SINGLE_USER_REQUEST,
@@ -61,7 +75,7 @@ export const fetchSingleProfessionalFailure = (
   }); 
 
   export const updateSingleUserSuccess = (
-    payload: boolean
+    payload: ProfessionalModel
   ): UpdateSingleUserSuccess => ({
     type: ProfessionalTypes.UPDATE_SINGLE_USER_SUCCESS,
     payload

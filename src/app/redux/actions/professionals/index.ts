@@ -32,6 +32,23 @@ export type FetchSingleProfessionalFailure = {
   error: string
 }
 
+//Search
+export type SearchSingleProfessionalRequest = {
+  type: typeof ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_REQUEST
+  payload: string
+}
+
+export type SearchSingleProfessionalSuccess = {
+  type: typeof ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_SUCCESS
+  payload: ProfessionalModel
+}
+
+export type SearchSingleProfessionalFailure = {
+  type: typeof ProfessionalTypes.SEARCH_SINGLE_PROFESSIONAL_FAILURE
+  error: string
+}
+
+//Update
 export type UpdateSingleUserRequest = {
     type: typeof ProfessionalTypes.UPDATE_SINGLE_USER_REQUEST
     payload: ProfessionalModel
@@ -39,7 +56,7 @@ export type UpdateSingleUserRequest = {
   
   export type UpdateSingleUserSuccess = {
     type: typeof ProfessionalTypes.UPDATE_SINGLE_USER_SUCCESS
-    payload: boolean
+    payload: ProfessionalModel
   }
   
   export type UpdateSingleUserFailure = {
@@ -57,3 +74,6 @@ export type ProfessionalActions =
   | UpdateSingleUserRequest
   | UpdateSingleUserSuccess
   | UpdateSingleUserFailure
+  | SearchSingleProfessionalRequest
+  | SearchSingleProfessionalSuccess
+  | SearchSingleProfessionalFailure

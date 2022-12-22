@@ -31,7 +31,6 @@ export async function buildUserModelFromAuth() {
 
         if(docSnap.exists())
         {
-            console.log(docSnap.data());
             let userModel:UserModel =
             {id:currentUser?.uid?currentUser?.uid:"",
             username:docSnap.data().username,
@@ -70,7 +69,6 @@ export async function buildProfessionalUserFromAuth() {
 
         if(docSnap.exists())
         {
-            console.log(docSnap.data());
             let userModel:ProfessionalModel =
             {id:docSnap.id,
             first_name:docSnap.data().first_name,

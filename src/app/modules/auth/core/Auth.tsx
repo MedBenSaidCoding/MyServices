@@ -107,7 +107,6 @@ const AuthInit: FC<WithChildren> = ({children}) => {
         setLoggedUser(loggedUser)
         setShowSplashScreen(false)
       } else {
-        console.log('log out from FB')
         logout()
         setShowSplashScreen(false)
       }

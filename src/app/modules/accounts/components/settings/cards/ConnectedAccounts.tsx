@@ -25,7 +25,6 @@ const ConnectedAccounts: React.FC = () => {
 
   const updateData = (fieldsToUpdate: Partial<ProfessionalModel>) => {
     const updatedData = {...data, ...fieldsToUpdate}
-    console.log(updatedData)
     setData(updatedData)
   }
 

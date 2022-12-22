@@ -48,7 +48,6 @@ export function Login() {
       setLoading(true)
       try {
         await loginFS(values.email, values.password)
-        console.log('after loggin');
         dispatch(fetchSingleProfessionalRequest("MOMO"))
   
         const authModel = await getAuthModelFromAuth();

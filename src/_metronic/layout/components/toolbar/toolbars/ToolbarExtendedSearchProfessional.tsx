@@ -2,7 +2,6 @@
 import {FC, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchProfessionalsRequest} from '../../../../../app/redux/action-creators/professionals'
-import {RootState} from '../../../../../app/redux/reducers/rootReducer'
 import {SearchFilterModel} from '../../../../../app/TSModels/Professionals/SearchFilterModel'
 import {KTSVG, toAbsoluteUrl} from '../../../../helpers'
 import {Dropdown1} from '../../../../partials'

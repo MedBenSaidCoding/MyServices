@@ -33,6 +33,10 @@ const ProfileDetails: React.FC = () => {
     setData(updatedData)
   }
 
+  const onAvatarChnage = (event:any)=>{
+    updateData({avatarFile: event.currentTarget.files[0]});
+  }
+
   const [loadingForm, setLoading] = useState(false)
   const formik = useFormik<ProfessionalModel>({
     initialValues,
@@ -41,6 +45,8 @@ const ProfileDetails: React.FC = () => {
       setLoading(true)
       values.isProfessional = data.isProfessional
       const updatedData = Object.assign(data, values)
+
+      console.log(data);
       dispatch(updateSingleUserRequest(updatedData))
       setData(updatedData)
       setLoading(false)
@@ -77,7 +83,7 @@ const ProfileDetails: React.FC = () => {
                 >
                   <div
                     className='image-input-wrapper w-125px h-125px'
-                    style={{backgroundImage: `url(${toAbsoluteUrl(data.avatar)})`}}
+                    style={{backgroundImage: `url(${toAbsoluteUrl(currentUser.avatar)})`}}
                   ></div>
                 </div>
               </div>
@@ -211,6 +217,7 @@ const ProfileDetails: React.FC = () => {
 
               <div className='col-lg-8 d-flex align-items-center'>
                 <div className='form-check form-check-solid form-switch fv-row'>
+                  
                   <input
                     className='form-check-input w-45px h-30px'
                     type='checkbox'
@@ -244,6 +251,28 @@ const ProfileDetails: React.FC = () => {
                 </div>
               </div>
             </div>
+         
+            <div className='row mb-6'>
+              <label className='col-lg-4 col-form-label fw-bold fs-6'>
+                <span className='required'>Avatar</span>
+              </label>
+
+              <div className='col-lg-8 fv-row'>
+                
+                <input
+                  type="file"
+                  onChange={(e) => e.currentTarget.files && updateData({avatarFile: e.currentTarget.files[0]})}
+                  className='form-control form-control-lg form-control-solid'
+                  accept="image/*"
+                />
+                {formik.touched.avatar && formik.errors.avatar && (
+                  <div className='fv-plugins-message-container'>
+                    <div className='fv-help-block'>{formik.errors.avatar}</div>
+                  </div>
+                )}
+              </div>
+            </div>
+         
           </div>
 
           <div className='card-footer d-flex justify-content-end py-6 px-9'>

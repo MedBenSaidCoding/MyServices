@@ -4,10 +4,11 @@ import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link, useParams} from 'react-router-dom'
 import {Dropdown1} from '../../../_metronic/partials'
 import {useLocation} from 'react-router-dom'
+import {ProfessionalModel} from '../../TSModels/Professionals/ProfessionalModel'
+import {format} from 'react-string-format'
 
-const ProfileHeader: React.FC = () => {
+const ProfileHeader: React.FC<ProfessionalModel> = (user: ProfessionalModel) => {
   const location = useLocation()
-  let {id} = useParams()
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -15,7 +16,7 @@ const ProfileHeader: React.FC = () => {
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
           <div className='me-7 mb-4'>
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-              <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metornic' />
+              <img src={toAbsoluteUrl(user.avatar)} alt='Metornic' />
               <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
             </div>
           </div>
@@ -25,7 +26,7 @@ const ProfileHeader: React.FC = () => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Max Smith 2
+                    {format('{0} {1}', user.first_name, user.last_name)}
                   </a>
                   <a href='#'>
                     <KTSVG
@@ -44,7 +45,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    Developer
+                    {user.entityType == 'company' ? 'Company' : 'Particual'}
                   </a>
                   <a
                     href='#'
@@ -54,7 +55,17 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
-                    SF, Bay Area
+                    {user.city}
+                  </a>
+                  <a
+                    href='#'
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
+                  >
+                    <KTSVG
+                      path='/media/icons/duotune/electronics/elc002.svg'
+                      className='svg-icon-4 me-1'
+                    />
+                    {user.phoneNumber1}
                   </a>
                   <a
                     href='#'
@@ -64,7 +75,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    max@kt.com
+                    {user.email}
                   </a>
                 </div>
               </div>
@@ -109,22 +120,16 @@ const ProfileHeader: React.FC = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>4500$</div>
+                      <i className='bi bi-star-fill svg-icon-3 svg-icon-success me-2 text-warning'></i>
+                      <div className='fs-2 fw-bolder'>{user.reviews} </div>
                     </div>
 
-                    <div className='fw-bold fs-6 text-gray-400'>Earnings</div>
+                    <div className='fw-bold fs-6 text-gray-400'>Reviews</div>
                   </div>
 
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr065.svg'
-                        className='svg-icon-3 svg-icon-danger me-2'
-                      />
+                      <i className='bi bi-award-fill svg-icon-3 svg-icon-success me-2 text-primary'></i>
                       <div className='fs-2 fw-bolder'>75</div>
                     </div>
 
@@ -168,9 +173,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === `/crafted/pages/profile/`+id+`/overview` && 'active')
+                  (location.pathname === `/crafted/pages/profile/` + user.id + `/overview` &&
+                    'active')
                 }
-                to={`/crafted/pages/profile/`+id+`/overview`}
+                to={`/crafted/pages/profile/` + user.id + `/overview`}
               >
                 Overview
               </Link>
@@ -179,9 +185,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === `/crafted/pages/profile/`+id+`/projects` && 'active')
+                  (location.pathname === `/crafted/pages/profile/` + user.id + `/projects` &&
+                    'active')
                 }
-                to={`/crafted/pages/profile/`+id+`/projects`}
+                to={`/crafted/pages/profile/` + user.id + `/projects`}
               >
                 Projects
               </Link>
@@ -190,9 +197,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === `/crafted/pages/profile/`+id+`/campaigns` && 'active')
+                  (location.pathname === `/crafted/pages/profile/` + user.id + `/campaigns` &&
+                    'active')
                 }
-                to={`/crafted/pages/profile/`+id+`/campaigns`}
+                to={`/crafted/pages/profile/` + user.id + `/campaigns`}
               >
                 Campaigns
               </Link>
@@ -201,9 +209,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === `/crafted/pages/profile/`+id+`/documents` && 'active')
+                  (location.pathname === `/crafted/pages/profile/` + user.id + `/documents` &&
+                    'active')
                 }
-                to={`/crafted/pages/profile/`+id+`/documents`}
+                to={`/crafted/pages/profile/` + user.id + `/documents`}
               >
                 Documents
               </Link>
@@ -212,9 +221,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === `/crafted/pages/profile/`+id+`/connections` && 'active')
+                  (location.pathname === `/crafted/pages/profile/` + user.id + `/connections` &&
+                    'active')
                 }
-                to={`/crafted/pages/profile/`+id+`/connections`}
+                to={`/crafted/pages/profile/` + user.id + `/connections`}
               >
                 Connections
               </Link>

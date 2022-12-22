@@ -13,5 +13,6 @@ export interface ProfessionalModel{
     phoneNumber2: string,
     onlineStatus: string,
     reviews:number,
-    entityType: string
+    entityType: string,
+    avatarFile?: File|string
     }

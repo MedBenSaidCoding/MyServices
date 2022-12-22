@@ -13,10 +13,10 @@ import {
 } from '../../../../_metronic/partials/widgets'
 
 type props={
-  selectedUser : any
+  selectedUser : ProfessionalModel
 }
 export function Overview(props:props) {
-  let {id} = useParams()
+
   return (
     <div className='row g-5 g-xxl-8'>
       <div className='col-xl-6'>

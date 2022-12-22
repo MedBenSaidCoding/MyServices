@@ -4,12 +4,20 @@ import createSagaMiddleware from 'redux-saga'
 import logger from 'redux-logger'
 import rootReducer from './reducers/rootReducer'
 import {rootSaga} from './sagas/rootSaga'
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const sagaMiddleware = createSagaMiddleware()
 const storeOld = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger))
 
+const persistConfig = {
+  key: 'authType',
+  storage: storage,
+  whitelist: ['authType','professionals','currentUser','searchSinglePro'] // which reducer want to store
+};
+const pReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: pReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       immutableCheck: false,
@@ -21,4 +29,5 @@ const store = configureStore({
 })
 
 sagaMiddleware.run(rootSaga)
+export const persistor = persistStore(store);
 export default store

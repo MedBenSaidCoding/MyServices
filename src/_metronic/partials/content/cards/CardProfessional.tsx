@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {IconUserModel} from '../../../../app/modules/profile/ProfileModels'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Reviews} from '../reviews/Reviews'
@@ -10,9 +10,17 @@ import {format} from 'react-string-format'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {solid, regular, brands, icon} from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 
+const renderTooltip = (props: any) => (
+  <Tooltip id='button-tooltip' {...props}>
+    {props.serviceName}
+  </Tooltip>
+)
 const CardProfessional: FC<ProfessionalModel> = (data: ProfessionalModel) => {
+  const location = useLocation()
   const {
+    id,
     avatar,
     first_name,
     last_name,
@@ -113,10 +121,16 @@ const CardProfessional: FC<ProfessionalModel> = (data: ProfessionalModel) => {
             {services &&
               services.map((service) => {
                 return (
-                  <i className={format(' me-4 text-primary')}>
-                    {' '}
-                    <ServiceAwesomeIcon serviceName={service} />
-                  </i>
+                  <OverlayTrigger
+                    placement='bottom'
+                    delay={{show: 250, hide: 400}}
+                    overlay={renderTooltip({serviceName: service})}
+                  >
+                    <i className={format(' me-4 text-primary')}>
+                      {' '}
+                      <ServiceAwesomeIcon serviceName={service} />
+                    </i>
+                  </OverlayTrigger>
                 )
               })}
           </div>
@@ -129,9 +143,15 @@ const CardProfessional: FC<ProfessionalModel> = (data: ProfessionalModel) => {
           title='This project completed'
         >
           {' '}
-          <a href='#' className={`btn btn-info w-100 py-3`}>
+          <Link
+            className={
+              `btn btn-info w-100 py-3` +
+              (location.pathname === `/crafted/pages/profile/` + id + `/overview` && 'active')
+            }
+            to={`/crafted/pages/profile/` + id + `/overview`}
+          >
             Profil
-          </a>
+          </Link>
         </div>
       </div>
     </Link>

@@ -42,6 +42,7 @@ const currentUserReducer = (state:CurrentUserStateType=initProfessionalsState, a
         case ProfessionalTypes.UPDATE_SINGLE_USER_SUCCESS:
             return {...state,
             isUpdating:false,
+            currentUser: action.payload,
             updateOperationStatusSuccess:true
         } 
         case ProfessionalTypes.UPDATE_SINGLE_USER_FAILURE:

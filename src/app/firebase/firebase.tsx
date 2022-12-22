@@ -1,6 +1,8 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
+import { getStorage } from "firebase/storage";
 import ReduxSagaFirebase from 'redux-saga-firebase'
 
 const app = firebase.initializeApp({
@@ -13,4 +15,5 @@ const app = firebase.initializeApp({
     measurementId: process.env.REACT_APP_API_MEASUREMENT_ID
 });
 export const reduxSagaFirebase = new ReduxSagaFirebase(app)
+export const storage = getStorage(app);
 export default app;
